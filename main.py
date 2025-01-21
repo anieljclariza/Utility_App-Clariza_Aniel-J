@@ -8,9 +8,7 @@ def welcome():
         print("Goodbye!")
 
 def display_items():
-    items = {
-        "drinks": ["Bottled Drinking Water", "Bottled Juice", "Bottled Cold Coffee"],
-        "food": ["Biscuits", "Shawrma", "Pizza"]
+    items = {"foods": "Shawarma"
     }
 
     for category, content in items.items():
