@@ -6,13 +6,13 @@ def rng():
 
 foods = {
 
-        "Pizza Hat pizza 🍕": (rng(), rng(), "F1"),
-        "Burger Emperor burger 🍔": (rng(), rng(), "F2"),
-        "McRonald's fries 🍟": (rng(), rng(), "F3"),
-        "Quasant's croissant 🥐" :(rng(), rng(), "F4"),
-        "Tuesdays' taco 🌮": (rng(), rng(), "F5"),
-        "New York Foods Society cheesedog 🌭": (rng(), rng(), "F6"),
-        "Los Pablos burrito 🌯": (rng(), rng(), "F7")
+        "F1": (rng(), rng(), "Pizza Hat pizza 🍕"),
+        "F2": (rng(), rng(), "Burger Emperor burger 🍔"),
+        "F3": (rng(), rng(), "McRonald's fries 🍟"),
+        "F4" :(rng(), rng(), "Quasant's croissant 🥐"),
+        "F5": (rng(), rng(), "Tuesdays' taco 🌮"),
+        "F6": (rng(), rng(), "New York Foods Society cheesedog 🌭"),
+        "F7": (rng(), rng(), "Los Pablos burrito 🌯")
 
         }
     
@@ -41,45 +41,30 @@ random_items = {
 
 def welcome():
     print("Welcome to Aniel's Randomized Vending Machine Program ❤️  🔥 🌭!")
+    print("Quality of the item is directly proportial to its price. The higher the price of the item the higher the quality.")
+
     print()
-
-    print("Would you like to provide your name  to improve your experience while using this program?")
-    print("Please be rest assured that the personal information that you enter will be deleted every time this program is rerun.")
-    personal_info = input("Provide name? [👍Yes] or [👎No]: ")
-    print()
-
-    if personal_info.upper() == "YES":
-        name = input("What is your good name?: ")
-        name = name.title()
-        name = name.replace(" ", "")
-        name = name.strip()
-        print(f"Hello, {name}! Thank you for checking out my program!")
-    else:
-        name = None
-        print("Okay loser.")
-        
-    print()
-    start_program(name)
+    start_program()
 
 
-def start_program(name):
+def start_program():
     print("Would you like to use the Vending Machine Program and see the stock?")
     prompt = input("[👍Yes] or [👎No = Quit]: ")
      
     if prompt.upper() == "YES":
         print()
-        display_items(name)
+        display_items()
     elif prompt.upper() == "NO":
         print("Understood! Thank you for checking out my program!")
     else:
         print()
-        print(f"I'm sorry {name} but I didn't get that. Please try again.")
-        start_program(name)
+        print(f"I'm sorry but I didn't get that. Please try again.")
+        start_program()
 
 
 
-def display_items(name):
-    selection = input("Please select a category to see [Foods = F][Drinks = D][Random Items = R]: ")
+def display_items():
+    selection = input("Please select a category to see [Foods = F][Drinks = D][Random Items = R] [QUIT PROGRAM = Q]: ")
     
     if selection.upper() == "FOODS" or selection.upper() == "F":
         selection = foods
@@ -87,47 +72,30 @@ def display_items(name):
         selection = drinks
     elif selection.upper() == "RANDOM ITEMS" or selection.upper() == "R":
         selection = random_items
+    elif selection.upper() == "QUIT PROGRAM" or selection.upper() == "Q":
+        print("Understood! Thank you for checking out my program!")
     else:
-        print(f"I'm sorry {name} but I didn't get that. Please try again.")
+        print(f"I'm sorry  but I didn't get that. Please try again.")
         print()
-        display_items(name)
+        display_items()
     print()
 
-    for item, (price, stock, code) in selection.items():
+    for code, (price, stock, item) in selection.items():
         print(f"[{code}]{item}: [price: {price} AED] [stock: {stock}]")
         
     print()
-    selection_again(name)
 
+    ask = input("Would you like to [BUY] now or [SEE] the stock again?: ")
+    if ask.upper() == "BUY":
+        code = input("Input the code of the item you wish to buy: ")
+        code = code.upper()
+        code = selection
+        print(f"[{code}]{code.get(item)} [{code.get(price)} AED] [{code.get(stock)} pieces]")
+        ask = int(input("How many would you like to buy?: "))
+        total = ask * price
+        print(f"Total is {total} AED for {ask} {item}s.")
+    elif ask.upper() == "SEE":
+        display_items()
 
-
-def selection_again(name):
-    selection_again = input("Would you like to [BUY] now, [SEE] the stock again, or do [ANOTHER] thing?: ")
-    if selection_again.upper() == "BUY":
-        selection_again = buy()
-    elif selection_again.upper() == "SEE":
-        selection_again = display_items(name)
-    elif selection_again.upper() == "ANOTHER":
-        print()
-        menu = input("Okay! Where would you like to go? [1 = Welcome Screen] [2 = Start Screen] [3 = Quit]: ")
-        if menu.upper() == "1" or menu.upper() == "WELCOME SCREEN":
-            print()
-            welcome()
-        elif menu.upper() == "2" or menu.upper() == "START SCREEN":
-            print()
-            start_program()
-        elif menu.upper() == "3" or menu.upper() == "QUIT":
-            print("Understood! Good bye and thanks for checking out my program.")
-        else:
-            print(f"I'm sorry {name} but I didn't get that. Please try again.")
-            print()
-            selection_again()
-    else:
-        print(f"I'm sorry {name} but I didn't get that. Please try again.")
-        print()
-        selection_again() 
-
-def buy():
-    print("Buy")
 
 welcome()
