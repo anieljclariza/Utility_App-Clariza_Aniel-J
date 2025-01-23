@@ -65,7 +65,7 @@ def welcome():
 def main_program():
     while True:
 
-        prompt = input("Please enter the category you wish to see [F = FOOODS] [D = DRINKS] [R = RANDOM ITEMS]: ")
+        prompt = input("Please enter the category you wish to see [F = FOODS] [D = DRINKS] [R = RANDOM ITEMS]: ")
         if prompt.upper() in ["F", "FOODS"]:
             selection = foods
             break
@@ -119,8 +119,5 @@ def main_program():
             print()
             print("I'm sorry but I didn't get that. Please try again.")
         break
-
-    welcome()
-
 
 welcome()
