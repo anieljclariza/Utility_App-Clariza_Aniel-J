@@ -1,9 +1,13 @@
+# Imported random module to use its function, randint()
 import random
 
+#Defined rng() function to generate random integers for stock and price
 def rng():
     random_number_generator = random.randint(1,10)
     return random_number_generator
 
+# 3 dictionaries containing the three categories in the vending machine
+# Key = Code, Value 1 = Price, Value 2 = Stock, Value 3 = Item
 foods = {
 
         "F1": (rng(), rng(), "Pizza Hat pizza 🍕"),
@@ -40,11 +44,12 @@ random_items = {
         }
 
 
-
+#Defined welcome() function as starting screen to the vending machine program
 def welcome():
 
     print("Welcome to Aniel's Randomized Vending Machine Program ❤️  🔥 🌭!")
 
+    #Used while True: loop to ask if user wants to use vending machine program or quit, and keeps looping if responses are invalid.
     while True: 
         
         print("Would you like to use the Vending Machine Program and see the stock?")
