@@ -49,7 +49,7 @@ def welcome():
 
     print("Welcome to Aniel's Randomized Vending Machine Program ❤️  🔥 🌭!")
 
-    #Used while True: loop to ask if user wants to use vending machine program or quit, and keeps looping if responses are invalid.
+    #Used while True: loop to ask if user wants to use vending machine program or quit, and keeps looping if responses are invalid
     while True: 
         
         print("Would you like to use the Vending Machine Program and see the stock?")
@@ -67,6 +67,7 @@ def welcome():
 
     print()
 
+# Defined main program where it displays stock and does the transaction as well
 def main_program():
     while True:
 
