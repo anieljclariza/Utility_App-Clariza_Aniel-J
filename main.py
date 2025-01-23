@@ -18,84 +18,109 @@ foods = {
     
 drinks = {
        
-        "Dark & White coffee ☕️": (rng(), rng(), "D1"),
-        "Japan Foods and Drinks Company tea 🍵": (rng(), rng(), "D2"),
-        "Feathermill Mixed Fruit Juice 🧃": (rng(), rng(), "D3"),
-        "Earth & Nature bottled drinking water 🥤" :(rng(), rng(), "D4"),
-        "Boba Fett boba tea 🧋": (rng(), rng(), "D5"),
-        "Nature's Finest bottled full cream milk 🥛": (rng(), rng(), "D6")
+        "D1": (rng(), rng(), "Dark & White coffee ☕️"),
+        "D2": (rng(), rng(), "Japan Foods and Drinks Company tea 🍵"),
+        "D3": (rng(), rng(), "Feathermill Mixed Fruit Juice 🧃"),
+        "D4" :(rng(), rng(), "Earth & Nature bottled drinking water 🥤"),
+        "D5": (rng(), rng(), "Boba Fett boba tea 🧋"),
+        "D6": (rng(), rng(), "Nature's Finest bottled full cream milk 🥛")
 
         }
 
 random_items = {
        
-        "I LOVE THIS EMOJI 😍": (rng(), rng(), "R1"),
-        "A MECHANICAL ARM?! 🦾": (rng(), rng(), "R2"),
-        "NARUTO SHIPPUDEN! 🥷": (rng(), rng(), "R3"),
-        "WHERE DID YOU GET A DRAGON?! 🐉" :(rng(), rng(), "R4"),
-        "THE WHOLE PLANET?! 🌏": (rng(), rng(), "R5"),
-        "NOW IT'S SATURN LIKE CMON MAN! 🪐": (rng(), rng(), "R6"),
-        "Peace Sign ☮️": (rng(), rng(), "R7")
+        "R1": (rng(), rng(), "I LOVE THIS EMOJI 😍"),
+        "R2": (rng(), rng(), "A MECHANICAL ARM?! 🦾"),
+        "R3": (rng(), rng(), "NARUTO SHIPPUDEN! 🥷"),
+        "R4" :(rng(), rng(), "WHERE DID YOU GET A DRAGON?! 🐉"),
+        "R5": (rng(), rng(), "THE WHOLE PLANET?! 🌏"),
+        "R6": (rng(), rng(), "NOW IT'S SATURN LIKE CMON MAN! 🪐"),
+        "R7": (rng(), rng(), "Peace Sign ☮️")
 
         }
 
+
+
 def welcome():
+
     print("Welcome to Aniel's Randomized Vending Machine Program ❤️  🔥 🌭!")
-    print("Quality of the item is directly proportial to its price. The higher the price of the item the higher the quality.")
+
+    while True: 
+        
+        print("Would you like to use the Vending Machine Program and see the stock?")
+        prompt = input("[👍Yes] or [👎No = Quit]: ")
+     
+        if prompt.upper() in ("Y", "YES"):
+            print()
+            main_program()
+        elif prompt.upper() in ("N", "NO"):
+            print("Understood! Thank you for checking out my program!")
+            break
+        else:
+            print()
+            print(f"I'm sorry but I didn't get that. Please try again.")
 
     print()
-    start_program()
 
+def main_program():
+    while True:
 
-def start_program():
-    print("Would you like to use the Vending Machine Program and see the stock?")
-    prompt = input("[👍Yes] or [👎No = Quit]: ")
-     
-    if prompt.upper() == "YES":
-        print()
-        display_items()
-    elif prompt.upper() == "NO":
-        print("Understood! Thank you for checking out my program!")
-    else:
-        print()
-        print(f"I'm sorry but I didn't get that. Please try again.")
-        start_program()
-
-
-
-def display_items():
-    selection = input("Please select a category to see [Foods = F][Drinks = D][Random Items = R] [QUIT PROGRAM = Q]: ")
+        prompt = input("Please enter the category you wish to see [F = FOOODS] [D = DRINKS] [R = RANDOM ITEMS]: ")
+        if prompt.upper() in ["F", "FOODS"]:
+            selection = foods
+            break
+        elif prompt.upper() in ["D", "DRINKS"]:
+            selection = drinks
+            break
+        elif prompt.upper() in ["R", "RANDOM ITEMS"]:
+            selection = random_items
+            break
+        else:
+            print()
+            print("I'm sorry but I didn't get that. Please try again.")
     
-    if selection.upper() == "FOODS" or selection.upper() == "F":
-        selection = foods
-    elif selection.upper() == "DRINKS" or selection.upper() == "D":
-        selection = drinks
-    elif selection.upper() == "RANDOM ITEMS" or selection.upper() == "R":
-        selection = random_items
-    elif selection.upper() == "QUIT PROGRAM" or selection.upper() == "Q":
-        print("Understood! Thank you for checking out my program!")
-    else:
-        print(f"I'm sorry  but I didn't get that. Please try again.")
-        print()
-        display_items()
     print()
 
     for code, (price, stock, item) in selection.items():
-        print(f"[{code}]{item}: [price: {price} AED] [stock: {stock}]")
-        
-    print()
+        print(f"[{code}]{item}: [price: {price} AED][stock: {stock}]")
 
-    ask = input("Would you like to [BUY] now or [SEE] the stock again?: ")
-    if ask.upper() == "BUY":
-        code = input("Input the code of the item you wish to buy: ")
-        code = code.upper()
-        code = selection
-        print(f"[{code}]{code.get(item)} [{code.get(price)} AED] [{code.get(stock)} pieces]")
-        ask = int(input("How many would you like to buy?: "))
-        total = ask * price
-        print(f"Total is {total} AED for {ask} {item}s.")
-    elif ask.upper() == "SEE":
-        display_items()
+    print()
+    
+    while True:
+        prompt = input("Please enter the [CODE] of the item that you wish to buy: ")
+        print()
+
+        item_code = prompt.upper()
+        
+        if item_code in selection:
+            price, stock, item = selection[item_code]
+            print(f"You have selected [{item_code}]{item}: [price: {price} AED] [stock: {stock}].")
+            while True:
+                qty = int(input("How many would you like to buy?: "))
+                total = qty * price
+                if qty <= stock and qty > 0:
+                    
+                    print(f"Total is {total} AED.")
+                    money = int(input("Please enter cash to complete the purchase: "))
+                    print()
+                    if money >= total:
+                        change = money - total
+                        print("Thenk you very much for using my Vending Machine Program!")
+                        print(f"You have bought a {qty} piece {item} totalling {total} AED.")
+                        print(f"Change is {change}.")
+                        print()
+                        break
+                    else:
+                        print("Invalid response or insufficient money entered. Please try again.")
+                else: 
+                    print("I'm sorry but the amount you want to but is more than the stock or your response was invalid. Please try again.")
+        
+        else:        
+            print()
+            print("I'm sorry but I didn't get that. Please try again.")
+        break
+
+    welcome()
 
 
 welcome()
