@@ -119,7 +119,7 @@ def main_program():
                     else:
                         print("Invalid response or insufficient money entered. Please try again.")
                 else: 
-                    print("I'm sorry but the amount you want to but is more than the stock or your response was invalid. Please try again.")
+                    print("I'm sorry but the amount you want to buy is more than the stock or your response was invalid. Please try again.")
         
         else:        
             print()
